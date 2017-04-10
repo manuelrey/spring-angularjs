@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorator="template">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Companies</title>
+</head>
+<body>
+    <div layout:fragment="content" class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading"> List of companies</div>
+            <div class="panel-body">
+                <div class="container">
+                    <form th:action="@{/taxes}" method="get" id="myForm">
+                        <label>Companies</label>
+                        <select name="code" onchange="document.getElementaryById(myForm).submit()">
+                            <option th:each="c:${companies}" th:text="${c.name}"
+                            th:value="${c.code}"></option>
+                        </select>
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </form>
+                </div>
+                <table class="table table-striped">
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Date taxe</th>
+                        <th>Amount</th>
+                        <th>Type</th>
+                    </tr>
+                    <tr th:each="t:${taxes}">
+                        <td th:text="${t.id}"></td>
+                        <td th:text="${t.Title}"></td>
+                        <td th:text="${t.dateTaxe}"></td>
+                        <td th:text="${t.amount}"></td>
+                        <td th:text="${t.class.simpleName}"></td>
+                    </tr>
+                </table>
+                <div>
+                    <ul class="nav nav-pills">
+                        <li th:class="${status.index==currentPage}?'active':''" th:each="p, status:${pages}">
+                            <a th:href="@{/companies(page=${status.index}, keyWord=${keyWord})}" th:text="${status.index}"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

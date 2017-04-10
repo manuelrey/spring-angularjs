@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8"/>
+    <title>Taxes</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
+</head>
+<body ng-app="App" ng-controller="MyController">
+    <div class="container">
+        <table class="table table-striped">
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Social reason</th>
+                <th>Email</th>
+            </tr>
+            <tr ng-repeat="c in pageCompanies.content">
+                <td>{{c.code}}</td>
+                <td>{{c.name}}</td>
+                <td>{{c.socialReason}}</td>
+                <td>{{c.email}}</td>
+            </tr>
+        </table>
+    </div>
+    <script type="text/javascript" src="angularjs/angular.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+</body>
+</html>

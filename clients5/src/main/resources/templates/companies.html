@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorator="template">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Companies</title>
+</head>
+<body>
+    <div layout:fragment="content" class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading"> List of companies</div>
+            <div class="panel-body">
+                <div class="container">
+                    <form th:action="@{/companies}" method="get    ">
+                        <label>key</label>
+                        <input type="text" name="keyWord"/>
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </form>
+                </div>
+                <table class="table table-striped">
+                    <tr>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Social reason</th>
+                    </tr>
+                    <tr th:each="c:${companiesList}">
+                        <td th:text="${c.code}"></td>
+                        <td th:text="${c.name}"></td>
+                        <td th:text="${c.socialReason}"></td>
+                        <td th:text="${c.email}"></td>
+                        <td>
+                            <a th:href="@{/taxes(code=${c.code})}">Taxes</a>
+                        </td>
+                    </tr>
+                </table>
+                <div>
+                    <ul class="nav nav-pills">
+                        <li th:class="${status.index==currentPage}?'active':''" th:each="p, status:${pages}">
+                            <a th:href="@{/companies(page=${status.index}, keyWord=${keyWord})}" th:text="${status.index}"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
